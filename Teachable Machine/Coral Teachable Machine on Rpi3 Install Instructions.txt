@@ -1,25 +1,21 @@
 0) Install EdgeTPU environment using the supplied instructions (download a python-tflite-source directory and run install. Make sure the demos in that package work, as advertised)
 
-1)	Install additional dependencies for teachable machine:
+1) Unpack and install additional dependencies for teachable machine:
 
-sudo apt-get install libgstreamer1.0-0 gstreamer1.0-tools gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-tools python3-gst-1.0 python3-gi
-
-sudo modprobe bcm2835-v4l2  
-(or better, add “bcm2835-v4l2” to the end of /etc/modules and reboot.)
-
-sudo python3 -m pip install python-periphery
 tar xvzf teachable_rpi3.tgz
+
+cd ./teachable
+
+sh ./install_requirements.sh
 
 2) Test the button UI (ensure cabling is correct)
 
-cd $HOME/teachable/
 sudo python3 teachable.py --testui
 
 If the wiring is correct you should see the 4 LEDs wiggle/flash and then it will run an infinite loop displaying which buttons are pressed. If you press a button the respective LED should light up.
 
 3) Run the teachable machine
 
-cd $HOME/teachable/
 sh run.sh
 
 At first the code will have no examples so no LED shoul dlight up. When you press a single button the code takes a snapshot of the image and it’s embedding (run through the accelerator) and saves it labeling it with that button. THus you have 4 classes you can “teach” tough i usually reserve “red” for background (just press it with nothing held up). THe other three can be used to learn finger shapes, faces, objects etc.
